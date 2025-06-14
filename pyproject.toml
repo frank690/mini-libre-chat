@@ -1,0 +1,35 @@
+[project]
+name = "mini-libre-chat"
+packages = [{include = "mini_libre_chat", from = "src"}]
+version = "0.0.2"
+description = "My very own mini libre chat version"
+authors = [
+    {name = "Frank Eschner", email = "frank.eschner@gmx.de"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12,<4"
+dependencies = [
+    "fastapi (>=0.115.12,<0.116.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "sqlalchemy (>=2.0.41,<3.0.0)",
+    "uvicorn (>=0.34.3,<0.35.0)",
+    "click (>=8.2.1,<9.0.0)",
+    "openai (>=1.86.0,<2.0.0)",
+    "dotenv (>=0.9.9,<0.10.0)",
+    "langchain (>=0.3.25,<0.4.0)",
+    "langchain-openai (>=0.3.23,<0.4.0)"
+]
+
+[project.scripts]
+mini-libre-chat = 'mini_libre_chat.backend.cli:cli'
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.0"
+pre-commit = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
