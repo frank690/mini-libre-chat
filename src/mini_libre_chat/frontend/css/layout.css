@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#chat {
+  width: 100%;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+#input-area {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  position: sticky;
+  bottom: 0;
+  max-width: 50%;
+  margin: 0 auto;
+  width: 100%;
+}

@@ -1,0 +1,46 @@
+.message {
+  max-width: 100%;
+  padding: 14px 18px;
+  border-radius: 18px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  font-size: 1rem;
+  background-color: var(--assistant-bg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.user {
+  align-self: flex-end;
+  background-color: var(--user-bg);
+}
+
+.assistant {
+  align-self: flex-start;
+}
+
+#input {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+  resize: none;
+  min-height: 24px;
+  outline: none;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+#send-btn {
+  padding: 0 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--button-bg);
+  color: white;
+  cursor: pointer;
+}
+
+#send-btn:hover {
+  background-color: var(--button-hover);
+}

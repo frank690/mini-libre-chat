@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mini Libre Chat</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
 
@@ -15,6 +15,11 @@
   </label>
 </div>
 
+<div id="welcome-container" class="unselectable">
+  <img id="welcome-logo" src="./media/logo.svg" alt="Logo" />
+  <span class="steel">Welcome</span><span class="brand"> </span><span id="name" class="name-fading brand">...</span>
+</div>
+
 <div id="chat"></div>
 
 <div id="input-area">
@@ -22,6 +27,6 @@
   <button id="send-btn">Send</button>
 </div>
 
-<script src="script.js"></script>
+<script type="module" src="./js/main.js"></script>
 </body>
 </html>

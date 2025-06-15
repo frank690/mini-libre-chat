@@ -10,8 +10,9 @@
 ## Frontend
 - [x] Dark/Light mode (v0.1.0)
 - [x] Align text messages from the very start (human right, model left) (v0.2.1)
-- [ ] Landing page (with branding etc)
+- [x] Landing page (with branding etc) (v0.3.0)
 - [ ] Animate incoming messages (fade in?)
 - [ ] Model output markdown should be displayed nicely
 - [ ] Prettify scrollbar
 - [ ] Make input text field adjust height depending on input
+- [ ] Add a logo (and favicon)
