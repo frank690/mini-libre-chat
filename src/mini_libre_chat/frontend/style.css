@@ -121,6 +121,7 @@ body {
 }
 
 .slider {
+  font-size: 20px;
   position: absolute;
   cursor: pointer;
   top: 0; left: 0;
@@ -131,19 +132,19 @@ body {
 }
 
 .slider:before {
+  content: "🌑";
   position: absolute;
-  content: "";
-  height: 24px; width: 24px;
-  left: 4px; bottom: 4px;
-  background-color: white;
+  height: 27px;
+  left: 4px;
+  bottom: 4px;
   transition: 0.4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #10a37f;
+  background-color: #3a6597;
 }
 
 input:checked + .slider:before {
-  transform: translateX(28px);
+  transform: translateX(25px);
 }
