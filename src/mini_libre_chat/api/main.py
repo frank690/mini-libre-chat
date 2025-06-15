@@ -42,6 +42,27 @@ class ChatRequest(BaseModel):
     message: str = ""
 
 
+class ChatHistory(BaseModel):
+    messages: list[dict] = [
+        {"role": "system", "content": "You are a helpful assistant."},
+    ]
+
+    def add_question(self, question: str) -> None:
+        """
+        Add the given user question to the chat history
+        """
+        self.messages.append({"role": "user", "content": question})
+
+    def add_answer(self, answer: str) -> None:
+        """
+        Add the given model answer to the chat history
+        """
+        self.messages.append({"role": "assistant", "content": answer})
+
+
+chat_history = ChatHistory()
+
+
 @app.get("/")
 def root():
     return RedirectResponse(url="/app")
@@ -55,11 +76,12 @@ async def validation_exception_handler(request, exc):
 
 @app.post("/chat")
 async def chat(data: ChatRequest):
-    message = {"role": "user", "content": data.message}
+    chat_history.add_question(question=data.message)
 
     reply_chunks = []
-    for chunk in azure.chat(message):
+    for chunk in azure.chat(chat_history.messages):
         reply_chunks.append(chunk)
     reply_text = "".join(reply_chunks)
 
+    chat_history.add_answer(answer=reply_text)
     return JSONResponse({"reply": reply_text})

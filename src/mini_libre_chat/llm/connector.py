@@ -41,15 +41,12 @@ class AzureConnector:
         self.top_p = top_p
         self.deployment = deployment
 
-    def chat(self, message: dict[str, str]) -> Generator[str, None, None]:
+    def chat(self, messages: list[dict]) -> Generator[str, None, None]:
         """
         Streaming chat generator with Azure OpenAI, safe from empty chunks.
         """
         response = self.client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                message,
-            ],
+            messages=messages,
             max_tokens=self.max_tokens,
             temperature=self.temperature,
             top_p=self.top_p,

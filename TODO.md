@@ -1,9 +1,12 @@
 # mini-libre-chat milestones
 
 - [ ] Chat history (multiple distinct chats)
-- [ ] Chat history (previous messages inside the same chat)
+- [x] Chat history (previous messages inside the same chat) (v0.2.0)
 - [ ] Landing page (with branding etc)
 - [ ] Connect to different models
 - [ ] Animate incoming messages (fade in?)
 - [ ] Add user login
-- [x] Dark/Light mode (v.0.1.0)
+- [x] Dark/Light mode (v0.1.0)
+- [ ] Model output markdown should be displayed nicely
+- [ ] Prettify scrollbar
+- [ ] Align text messages from the very start (human right, model left)
