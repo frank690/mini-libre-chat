@@ -10,3 +10,4 @@
 - [ ] Model output markdown should be displayed nicely
 - [ ] Prettify scrollbar
 - [x] Align text messages from the very start (human right, model left) (v0.2.1)
+- [ ] Make input text field adjust height depending on input
