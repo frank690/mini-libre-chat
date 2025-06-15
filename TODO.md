@@ -9,4 +9,4 @@
 - [x] Dark/Light mode (v0.1.0)
 - [ ] Model output markdown should be displayed nicely
 - [ ] Prettify scrollbar
-- [ ] Align text messages from the very start (human right, model left)
+- [x] Align text messages from the very start (human right, model left) (v0.2.1)
