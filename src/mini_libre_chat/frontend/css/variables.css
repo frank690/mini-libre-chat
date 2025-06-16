@@ -7,6 +7,9 @@
   --button-bg: #10a37f;
   --button-hover: #0f8f6b;
   --border: #ccc;
+  --scrollbar-bg: #F5F5F5;
+  --scrollbar-thumb: #464646;
+  --toggle-bg: #464646;
 }
 
 body.dark {
@@ -18,4 +21,7 @@ body.dark {
   --button-bg: #10a37f;
   --button-hover: #0c7b5e;
   --border: #555;
+  --scrollbar-bg: #2a2a2a;
+  --scrollbar-thumb: #464646;
+  --toggle-bg: #464646;
 }
