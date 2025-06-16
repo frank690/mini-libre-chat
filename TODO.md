@@ -20,3 +20,4 @@
 - [ ] Model output markdown should be displayed nicely
 - [ ] Make input text field adjust height depending on input
 - [ ] Add a logo (and favicon)
+- [ ] Animate waiting for model results
