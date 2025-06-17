@@ -2,10 +2,10 @@
 
 ## Backend
 - [x] Chat history (previous messages inside the same chat) (v0.2.0)
+- [x] Make CLI useful (not just database stuff) (v0.5.0)
 - [ ] Chat history (multiple distinct chats)
 - [ ] Connect to different models
 - [ ] Add user login (via microsoft login?)
-- [ ] Make CLI useful (not just database stuff)
 - [ ] Incorporate langchain (or langgraph?)
 - [ ] Add different agents
 - [ ] Exception messages if model does not answer properly
