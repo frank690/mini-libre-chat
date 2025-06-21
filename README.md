@@ -7,7 +7,8 @@ An (incomplete) roadmap can be found in the [TODO list](./TODO.md).
 
 ## How to run this?
 ```bash
-cd mini-libre-chat
+git clone git@github.com:frank690/mini-libre-chat.git
+cd .\mini-libre-chat\
 python -m venv venv
 .\venv\Scripts\activate  # on windows
 pip install poetry

@@ -6,6 +6,7 @@
 - [ ] Connect to different models
 - [ ] Add user login
 - [ ] Make CLI useful (not just database stuff)
+- [ ] Load more configurations via .env file
 
 ## Frontend
 - [x] Dark/Light mode (v0.1.0)
