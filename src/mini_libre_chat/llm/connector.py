@@ -2,7 +2,7 @@
 This file defines a connector to connect with LLM models from different providers
 """
 
-from typing import Generator
+from openai import OpenAIError, RateLimitError, APIConnectionError, AuthenticationError
 from mini_libre_chat.llm.constants import (
     DEFAULT_MAX_TOKENS,
     DEFAULT_TEMPERATURE,
@@ -41,24 +41,33 @@ class AzureConnector:
         self.top_p = top_p
         self.deployment = deployment
 
-    def chat(self, messages: list[dict]) -> Generator[str, None, None]:
+    def chat(self, messages: list[dict]) -> str:
         """
         Streaming chat generator with Azure OpenAI, safe from empty chunks.
         """
-        response = self.client.chat.completions.create(
-            messages=messages,
-            max_tokens=self.max_tokens,
-            temperature=self.temperature,
-            top_p=self.top_p,
-            model=self.deployment,
-            stream=True,
-        )
+        try:
+            response = self.client.chat.completions.create(
+                messages=messages,
+                max_tokens=self.max_tokens,
+                temperature=self.temperature,
+                top_p=self.top_p,
+                model=self.deployment,
+                stream=False,
+            )
 
-        for chunk in response:
-            # Safety check
-            if not chunk.choices or not hasattr(chunk.choices[0], "delta"):
-                continue  # Skip malformed or empty chunks
+            choice = response.choices[0]
+            if not choice.message or not choice.message.content:
+                return "No content received from the model."
 
-            delta = chunk.choices[0].delta
-            if delta and delta.content:
-                yield delta.content
+            return choice.message.content
+
+        except RateLimitError:
+            return "⚠️ Rate limit exceeded. Please try again later."
+        except AuthenticationError:
+            return "❌ Authentication failed. Contact the system administrator."
+        except APIConnectionError:
+            return "🌐 Unable to connect to the model server. Try again soon."
+        except OpenAIError as e:
+            return f"❗ An unexpected error occurred: {e}"
+        except Exception as e:
+            return f"❓ Unknown error: {e}"

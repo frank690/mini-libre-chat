@@ -32,11 +32,11 @@
 }
 
 .steel {
-  color: #909090;
+  color: var(--steel);
 }
 
 .brand {
-  color: #00B5EF;
+  color: var(--brand);
 }
 
 .unselectable {

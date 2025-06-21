@@ -41,7 +41,7 @@
 }
 
 input:checked + .slider {
-  background-color: #464646;
+  background-color: var(--toggle-bg);
 }
 
 input:checked + .slider:before {

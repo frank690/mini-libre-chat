@@ -8,6 +8,13 @@ body {
   height: 100vh;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
 #chat {
   width: 100%;
   flex: 1;
@@ -17,7 +24,7 @@ body {
   flex-direction: column;
   gap: 16px;
   max-width: 50%;
-  margin: 0 auto;
+  margin: 20px auto 0px auto;
 }
 
 #input-area {

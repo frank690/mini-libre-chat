@@ -7,26 +7,39 @@
   <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
+  <div id="sidebar">
+    <button id="toggle-btn-inside" class="toggle-btn">&#9776;</button>
+    <br />
+    <h2>Mini Libre Chat</h2>
+    <ul>
+      <li>New Chat</li>
+      <li>Settings</li>
+      <li>About</li>
+    </ul>
+  </div>
 
-<div id="theme-toggle">
-  <label class="switch">
-    <input type="checkbox" id="dark-mode-toggle" />
-    <span class="slider"></span>
-  </label>
-</div>
+  <button id="toggle-btn-outside" class="toggle-btn">&#9776;</button>
 
-<div id="welcome-container" class="unselectable">
-  <img id="welcome-logo" src="./media/logo.svg" alt="Logo" />
-  <span class="steel">Welcome</span><span class="brand"> </span><span id="name" class="name-fading brand">...</span>
-</div>
+  <div id="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="dark-mode-toggle" />
+      <span class="slider"></span>
+    </label>
+  </div>
 
-<div id="chat"></div>
+  <main id="main">
+    <div id="welcome-container" class="unselectable">
+      <img id="welcome-logo" src="./media/logo.svg" alt="Logo" />
+      <span class="steel">Welcome</span><span class="brand"> </span><span id="name" class="name-fading brand">...</span>
+    </div>
+    <div id="chat" class="scrollbar"></div>
+    <div id="input-area">
+      <textarea id="input" placeholder="Type your message..."></textarea>
+      <button id="send-btn">Send</button>
+      <button id="save-btn">Save Chat</button>
+    </div>
+  </main>
 
-<div id="input-area">
-  <textarea id="input" placeholder="Type your message..."></textarea>
-  <button id="send-btn">Send</button>
-</div>
-
-<script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>

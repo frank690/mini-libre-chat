@@ -1,21 +1,27 @@
 :root {
   --bg: #f0f2f5;
   --text: #1f1f1f;
-  --user-bg: #dcfce7;
+  --user-bg:rgba(220, 238, 252, 1);
   --assistant-bg: #ffffff;
   --input-bg: #ffffff;
-  --button-bg: #10a37f;
-  --button-hover: #0f8f6b;
+  --button-bg: #00B5EF;
+  --button-hover:rgb(0, 107, 143);
   --border: #ccc;
+  --scrollbar-bg: #F5F5F5;
+  --scrollbar-thumb: #464646;
+  --toggle-bg: #464646;
+  --steel: #909090;
+  --brand: #00B5EF;
 }
 
 body.dark {
   --bg: #1e1e1e;
   --text: #f1f1f1;
-  --user-bg: #3a4f3f;
+  --user-bg:rgba(58, 69, 79, 1);
   --assistant-bg: #2a2a2a;
   --input-bg: #2a2a2a;
-  --button-bg: #10a37f;
-  --button-hover: #0c7b5e;
   --border: #555;
+  --scrollbar-bg: #2a2a2a;
+  --scrollbar-thumb: #464646;
+  --toggle-bg: #464646;
 }
