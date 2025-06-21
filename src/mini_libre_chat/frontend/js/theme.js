@@ -1,4 +1,3 @@
-// theme.js
 const toggle = document.getElementById("dark-mode-toggle");
 
 function updateIcon() {

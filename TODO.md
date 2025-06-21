@@ -3,7 +3,7 @@
 ## Backend
 - [x] Chat history (previous messages inside the same chat) (v0.2.0)
 - [x] Make CLI useful (not just database stuff) (v0.5.0)
-- [ ] Chat history (multiple distinct chats)
+- [~] Chat history (multiple distinct chats) (v0.6.0)
 - [ ] Connect to different models
 - [ ] Add user login (via microsoft login?)
 - [ ] Incorporate langchain (or langgraph?)
@@ -13,6 +13,7 @@
 - [ ] Searching all chat histories
 - [ ] Sharing a chat
 - [ ] Make AZURE_ENDPOINT environment variable actually work
+- [ ] Use Redis backend for history storing
 
 ## Frontend
 - [x] Dark/Light mode (v0.1.0)

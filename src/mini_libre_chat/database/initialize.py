@@ -8,7 +8,7 @@ __all__ = ["create_schema_and_tables", "drop_schema"]
 from sqlalchemy import text
 
 from mini_libre_chat.database.constants import SCHEMA
-from mini_libre_chat.database.engine import engine, Base
+from mini_libre_chat.database.models import sql
 from mini_libre_chat.utils import create_logger
 
 
@@ -28,11 +28,11 @@ def create_schema_and_tables() -> bool:
     logger.info(f"Creating schema: {SCHEMA}")
 
     try:
-        with engine.connect() as conn:
+        with sql.Engine.begin() as conn:
             conn.execute(text(f"CREATE SCHEMA IF NOT EXISTS {SCHEMA}"))
 
-        Base.metadata.schema = SCHEMA
-        Base.metadata.create_all(engine)
+        sql.Base.metadata.schema = SCHEMA
+        sql.Base.metadata.create_all(sql.Engine)
         logger.info("Database schema and tables created successfully.")
         return True
 
@@ -59,7 +59,7 @@ def drop_schema(confirmation: bool = False) -> bool:
 
     logger.info(f"Dropping schema: {SCHEMA}")
     try:
-        with engine.connect() as conn:
+        with sql.Engine.connect() as conn:
             conn.execute(text(f"DROP SCHEMA {SCHEMA} CASCADE"))
 
         logger.info("Dropping of schema and all table was successfull")

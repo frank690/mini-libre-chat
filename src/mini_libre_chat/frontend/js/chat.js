@@ -1,7 +1,7 @@
-// chat.js
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 const sendBtn = document.getElementById("send-btn");
+const saveBtn = document.getElementById("save-btn");
 
 function appendMessage(role, text) {
   const msg = document.createElement("div");
@@ -26,7 +26,7 @@ async function sendMessage(hideWelcome) {
     const res = await fetch("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: userInput })
+      body: JSON.stringify({ content: userInput })
     });
 
     const data = await res.json();
@@ -37,8 +37,34 @@ async function sendMessage(hideWelcome) {
   }
 }
 
+async function safe_chat() {
+  const originalText = saveBtn.textContent;
+  saveBtn.textContent = "Saving...";
+  saveBtn.disabled = true;
+  try {
+    const res = await fetch("/save_chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" }
+    });
+    const data = await res.json();
+    if (res.ok) {
+      alert("✅ " + data.message);
+    } else {
+      alert("❌ " + (data.detail || "Save failed."));
+    }
+  } catch (err) {
+    console.error("Save failed:", err);
+    alert("⚠️ Could not save chat.");
+  } finally {
+    saveBtn.textContent = originalText;
+    saveBtn.disabled = false;
+  }
+}
+
+
 function setupChat(hideWelcome) {
   sendBtn.addEventListener("click", () => sendMessage(hideWelcome));
+  saveBtn.addEventListener("click", () => safe_chat());
   input.addEventListener("keydown", e => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();

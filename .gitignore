@@ -1,3 +1,6 @@
+# Project-specific .gitignore file for Python projects
+.vscode/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -1,4 +1,3 @@
-// welcome.js
 const names = ["Foo", "Bar", "Baz"];
 const nameElement = document.getElementById("name");
 const welcome = document.getElementById("welcome-container");

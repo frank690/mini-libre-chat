@@ -44,3 +44,17 @@
 #send-btn:hover {
   background-color: var(--button-hover);
 }
+
+#save-btn {
+  padding: 0 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--button-bg);
+  color: white;
+  cursor: pointer;
+}
+
+#save-btn:hover {
+  background-color: var(--button-hover);
+}
