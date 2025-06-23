@@ -6,7 +6,12 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
 from mini_libre_chat.llm.connector import AzureConnector
 from mini_libre_chat.database.models import api
-from mini_libre_chat.database.crud import _get_all_chats, save_chat
+from mini_libre_chat.database.crud import (
+    _get_all_chats,
+    _get_chat,
+    save_chat,
+    _get_titles,
+)
 from mini_libre_chat.api.dependencies import get_db
 from sqlalchemy.orm import Session
 from mini_libre_chat.utils.logging import create_logger
@@ -49,7 +54,28 @@ async def get_chats(db: Session = Depends(get_db)) -> list[api.ChatRead]:
     Returns:
         A list of all chats stored in the database.
     """
+    logger.info("Retrieving all chats from the database...")
     return _get_all_chats(db=db)
+
+
+@router.get("/titles")
+async def get_titles(db: Session = Depends(get_db)) -> list[tuple[int, str]]:
+    """
+    Retrieve all chat titles from the database.
+
+    Args:
+        db: Database session dependency.
+
+    Returns:
+        A list of chat titles.
+    """
+    logger.info("Retrieving chat titles from the database...")
+    titles = _get_titles(db=db)
+
+    if not titles:
+        raise HTTPException(status_code=404, detail="No chat titles found.")
+
+    return titles
 
 
 @router.post("/save_chat")
@@ -63,7 +89,8 @@ async def save_current_chat(db: Session = Depends(get_db)):
     Returns:
         JSONResponse: A confirmation message.
     """
-    logger.info
+    logger.info("Saving current chat to the database...")
+
     if len(chat_history.messages) == 0:
         raise HTTPException(status_code=400, detail="No chat history to save.")
 
@@ -82,3 +109,31 @@ async def save_current_chat(db: Session = Depends(get_db)):
             "title": chat_history.title,
         }
     )
+
+
+@router.get("/chat/{chat_id}")
+async def get_chat(chat_id: int, db: Session = Depends(get_db)) -> api.ChatRead:
+    """
+    Get full chat by ID.
+    """
+    global chat_history
+
+    chat = _get_chat(chat_id=chat_id, db=db)
+
+    if not chat:
+        raise HTTPException(status_code=404, detail="Chat not found")
+
+    logger.info(f"Retrieved chat with ID {chat_id} and title: {chat.title}.")
+
+    chat_history = api.ChatCreate(
+        id=chat.id,
+        title=chat.title,
+        messages=[
+            api.MessageCreate(role=msg.role, content=msg.content)
+            for msg in chat.messages
+        ],
+    )
+
+    logger.info("Overwrote in-memory chat history with retrieved chat.")
+
+    return chat

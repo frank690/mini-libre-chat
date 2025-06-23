@@ -8,13 +8,14 @@ __all__ = [
     "_get_all_chats",
     "save_chat",
     "_append_messages_to_chat",
+    "_get_titles",
 ]
 
 from sqlalchemy.orm import Session
 from mini_libre_chat.database.models import sql, api
 from mini_libre_chat.utils.logging import create_logger
 
-logger = create_logger("crud")
+logger = create_logger("database.crud")
 
 
 def _add_new_chat(db: Session, chat: api.ChatCreate) -> int:
@@ -123,9 +124,30 @@ def _append_messages_to_chat(
     Returns:
         int: The ID of the chat after appending messages.
     """
-    for msg in new_messages:
+    chat = db.query(sql.Chat).filter(sql.Chat.id == chat_id).first()
+    num_existing_messages = len(chat.messages) if chat else 0
+
+    for msg in new_messages[num_existing_messages:]:
         db.add(sql.Message(chat_id=chat_id, role=msg.role, content=msg.content))
 
     db.commit()
     logger.info(f"Appended {len(new_messages)} new messages to chat with ID {chat_id}.")
     return chat_id
+
+
+def _get_titles(db: Session) -> list[tuple[int, str]]:
+    """
+    Retrieve titles of all chats from the database.
+    Besides title, also return the chat id for reference.
+
+    Args:
+        db: Database instance
+
+    Returns:
+        List of chat titles with their IDs.
+    """
+    titles = (
+        db.query(sql.Chat.id, sql.Chat.title).filter(sql.Chat.title.is_not(None)).all()
+    )
+    logger.info(f"Retrieved {len(titles)} chat titles from the database.")
+    return titles

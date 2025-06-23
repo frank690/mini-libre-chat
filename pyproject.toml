@@ -1,7 +1,7 @@
 [project]
 name = "mini-libre-chat"
 packages = [{include = "mini_libre_chat", from = "src"}]
-version = "0.6.2"
+version = "0.7.1"
 description = "My very own mini libre chat version"
 authors = [
     {name = "Frank Eschner", email = "frank.eschner@gmx.de"}

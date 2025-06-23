@@ -3,7 +3,7 @@
 ## Backend
 - [x] Chat history (previous messages inside the same chat) (v 0.2)
 - [x] Make CLI useful (not just database stuff) (v 0.5)
-- [~] Chat history (multiple distinct chats) (v 0.6)
+- [x] Chat history (multiple distinct chats) (v 0.6)
 - [x] Title generation upon saving conversation (v 0.7)
 - [ ] Connect to different models
 - [ ] Add user login (via microsoft login?)
@@ -14,7 +14,7 @@
 - [ ] Searching all chat histories
 - [ ] Sharing a chat
 - [ ] Make AZURE_ENDPOINT environment variable actually work
-- [ ] Use Redis backend for history storing
+- [ ] Enable multi-user engagement (e.g. via redis)
 - [ ] Load more configurations via .env file
 
 ## Frontend

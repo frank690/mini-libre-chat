@@ -1,3 +1,5 @@
+import { hideWelcome } from "./welcome.js";
+
 const chat = document.getElementById("chat");
 const input = document.getElementById("input");
 const sendBtn = document.getElementById("send-btn");
@@ -11,7 +13,7 @@ function appendMessage(role, text) {
   chat.scrollTop = chat.scrollHeight;
 }
 
-async function sendMessage(hideWelcome) {
+async function sendMessage() {
   const userInput = input.value.trim();
   if (!userInput) return;
 
@@ -61,16 +63,37 @@ async function safe_chat() {
   }
 }
 
+async function loadChat(chatId) {
+  try {
+    const res = await fetch(`/chat/${chatId}`);
+    if (!res.ok) {
+      throw new Error("Failed to load chat");
+    }
+    const chat = await res.json();
+    await hideWelcome(); // in case loading was done on a virgin chat
+    renderChat(chat);
+  } catch (err) {
+    console.error("Error loading chat:", err);
+    alert("❌ Failed to load chat.");
+  }
+}
 
-function setupChat(hideWelcome) {
-  sendBtn.addEventListener("click", () => sendMessage(hideWelcome));
+function renderChat(chat) {
+  chat.innerHTML = ""; // Clear previous chat
+  for (const message of chat.messages) {
+    appendMessage(message.role, message.content);
+  }
+}
+
+function setupChat() {
+  sendBtn.addEventListener("click", () => sendMessage());
   saveBtn.addEventListener("click", () => safe_chat());
   input.addEventListener("keydown", e => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      sendMessage(hideWelcome);
+      sendMessage();
     }
   });
 }
 
-export { setupChat };
+export { setupChat, loadChat };
