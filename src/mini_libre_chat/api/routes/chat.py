@@ -9,9 +9,17 @@ from mini_libre_chat.database.models import api
 from mini_libre_chat.database.crud import _get_all_chats, save_chat
 from mini_libre_chat.api.dependencies import get_db
 from sqlalchemy.orm import Session
+from mini_libre_chat.utils.logging import create_logger
 
 import os
+import sys
+import asyncio
 
+if sys.platform.startswith("win"):
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+
+logger = create_logger("api.routes.chat")
 
 router = APIRouter()
 azure = AzureConnector(api_key=os.getenv("AZURE_OPENAI_API_KEY"))
@@ -55,10 +63,22 @@ async def save_current_chat(db: Session = Depends(get_db)):
     Returns:
         JSONResponse: A confirmation message.
     """
+    logger.info
     if len(chat_history.messages) == 0:
         raise HTTPException(status_code=400, detail="No chat history to save.")
+
+    if chat_history.title is None:
+        chat_with_title_question = chat_history.ask_for_title()
+        generated_title = azure.chat(chat_with_title_question)
+        chat_history.title = generated_title
 
     saved_chat_id = save_chat(db=db, chat=chat_history, chat_id=chat_history.id)
     chat_history.id = saved_chat_id  # Update in-memory chat ID to match saved chat
 
-    return JSONResponse({"message": "Chat saved successfully", "id": saved_chat_id})
+    return JSONResponse(
+        {
+            "message": "Chat saved successfully",
+            "id": saved_chat_id,
+            "title": chat_history.title,
+        }
+    )

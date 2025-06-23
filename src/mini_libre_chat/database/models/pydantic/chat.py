@@ -38,6 +38,16 @@ class ChatCreate(ChatBase):
         """
         self.messages.append(MessageCreate(role="assistant", content=answer))
 
+    def ask_for_title(self) -> MessageCreate:
+        """
+        Formulate a question that asks for creation of a title of the existing chat.
+        """
+        title_question = MessageCreate(
+            role="system",
+            content="Your task is to come up with a title for the previous conversation. Do not exceed 10 words.",
+        )
+        return self.messages + [title_question]
+
 
 class ChatRead(ChatBase):
     id: int
